@@ -92,12 +92,12 @@ class Rect():
     def __str__(self):
         return f"Rect: ({self.tl.x:0.3f}, {self.tl.y:0.3f}), ({self.br.x:0.3f}, {self.br.y:0.3f})"
 
-    # Used to ensure that coordinates are in tl, br order after updates
-    # Coordinate system is:
-    # 0, 0 -->
-    # | tl
-    # v     br
     def __normalize__(self):
+        # Used to ensure that coordinates are in tl, br order after updates
+        # Coordinate system is:
+        # 0, 0 -->
+        # | tl
+        # v     br
         p1 = self.tl.copy()
         p2 = self.br.copy()
         self.tl = Point(min(p1.x, p2.x), min(p1.y, p2.y))
@@ -118,8 +118,8 @@ class Rect():
             self.br + p
         )
 
-    # Move a rectangle by `p`, up until it bumps into one edge of `bounds`
     def saturating_translate(self, p: Point, bounds):
+        # Move a rectangle by `p`, up until it bumps into one edge of `bounds`
         # check if our bounds are too small, leading to an impossible solution
         if self.width() > bounds.width() or self.height() > bounds.height():
             return None
